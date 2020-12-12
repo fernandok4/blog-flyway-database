@@ -1,0 +1,22 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.10'
+    id "org.flywaydb.flyway" version "7.3.1"
+}
+
+group 'br.com.fernandokanashiro'
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.22'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+}
+
+flyway {
+    url = "jdbc:mysql://${System.getenv().get("MYSQL_BLOG_HOST")}:${System.getenv().get("MYSQL_BLOG_PORT")}/${System.getenv().get("MYSQL_BLOG_DATABASE")}"
+    user = System.getenv().get("MYSQL_BLOG_USER")
+    password = System.getenv().get("MYSQL_BLOG_PASSWORD")
+}
